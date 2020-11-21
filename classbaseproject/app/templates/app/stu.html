@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% load crispy_forms_tags %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<center>
+    <h2>Student Information....</h2>
+    <table border="3">
+        <thead>
+        <th>student_id</th>
+        <th>student_name</th>
+        <th>student_marks</th>
+        <th>student_addr</th>
+        <th>student_date_time</th>
+        <th>student_email_id</th>
+        <th>Edit_Student</th>
+        <th>Delete_Student</th>
+
+        </thead>
+        {% for i in data %}
+        <tr>
+            <td>{{i.stu_id}}</td>
+            <td>{{i.name}}</td>
+            <td>{{i.marks}}</td>
+            <td>{{i.addr}}</td>
+            <td>{{i.date_time}}</td>
+            <td>{{i.email}}</td>
+            <td><a href="/update/{{i.stu_id}}/"><button type="submit" name="button">Edit</button></a></td>
+            <td><a href="/delete/{{i.stu_id}}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/cls/">Add_Student_Data</a><br><br>
+    <form action="/logout/" method="POST">
+        {% csrf_token %}
+        <button type="submit" name="button">Logout</button>
+    </form>
+
+    {% if messages %}
+    {% for msg in messages %}
+       <h4>{{msg}}</h4>
+    {%endfor%}
+    {%endif%}
+</center>
+</body>
+</html>
